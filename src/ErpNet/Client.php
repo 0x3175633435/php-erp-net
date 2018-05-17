@@ -14,6 +14,19 @@ class Client
      * @var string Local do arquivo que armazenará os cookies
      */
     protected $cookieFile;
+    
+    /**
+     * @var string Endereço da API do ERP.Net
+     */
+    protected $endPoint;
+    
+    /**
+     * @param string $endPoint Endereço para onde as requisições serão enviadas
+     */
+    public function __construct($endPoint = 'https://erpnet.online')
+    {
+        $this->endPoint = $endPoint;
+    }
 
     /**
      * @param string $cookieFile Local do arquivo que armazenará os cookies
@@ -30,7 +43,7 @@ class Client
      */
     public function post($url, $payload)
     {
-        $ch = curl_init("https://erpnet.online$url");
+        $ch = curl_init($this->endPoint . $url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -50,7 +63,7 @@ class Client
      */
     public function get($url)
     {
-        $ch = curl_init("https://erpnet.online$url");
+        $ch = curl_init($this->endPoint . $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -67,7 +80,7 @@ class Client
      */
     public function put($url, $payload)
     {
-        $ch = curl_init("https://erpnet.online$url");
+        $ch = curl_init($this->endPoint . $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -86,7 +99,7 @@ class Client
      */
     public function delete($url, $payload)
     {
-        $ch = curl_init("https://erpnet.online$url");
+        $ch = curl_init($this->endPoint . $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
