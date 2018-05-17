@@ -1,4 +1,8 @@
-# php-erp-net
+
+![](http://www.unimake.com.br/pub/images/logou.png)
+
+### php-erp-net
+
 Biblioteca do PHP para consumo das funcionalidades do ERP.Net da Unimake Software.
 
 ```php
